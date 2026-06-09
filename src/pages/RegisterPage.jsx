@@ -34,12 +34,12 @@ function RegisterPage() {
         }
 
         if (form.password.length < 8) {
-            alert("Mật khẩu phải có ít nhất 8 ký tự");
+            alert("The password must be at least 8 characters long.");
             return;
         }
 
         if (form.password !== form.confirmPassword) {
-            alert("Mật khẩu xác nhận không khớp");
+            alert("The password confirmation does not match.");
             return;
         }
 
@@ -56,10 +56,10 @@ function RegisterPage() {
                 role: form.role,
             });
 
-            alert("Đăng ký thành công");
+            alert("Registration successful");
             navigate("/login");
         } catch (error) {
-            alert("Đăng ký thất bại: " + error.message);
+            alert("Registration failed: " + error.message);
         }
     };
     return (

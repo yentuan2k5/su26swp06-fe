@@ -11,7 +11,7 @@ function ForgotPassWordPage() {
         e.preventDefault();
 
         if (!identifier.trim()) {
-            alert("Vui lòng nhập username hoặc email");
+            alert("Please enter your username or email.");
             return;
         }
 

@@ -17,7 +17,7 @@ function ResetPassWord() {
         e.preventDefault();
 
         if (!token) {
-            alert("Token không hợp lệ hoặc bị thiếu");
+            alert("Invalid or missing token");
             return;
         }
 

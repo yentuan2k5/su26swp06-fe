@@ -17,16 +17,16 @@ function OAuth2CallbackPage() {
         return (
             <main style={{ padding: "40px", fontFamily: "Arial, sans-serif" }}>
                 <h2>Google login failed</h2>
-                <p>Không tìm thấy token đăng nhập từ Google.</p>
-                <Link to="/login">Quay lại Login</Link>
+                <p>Login token from Google not found.</p>
+                <Link to="/login">Back to Login</Link>
             </main>
         );
     }
 
     return (
         <main style={{ padding: "40px", fontFamily: "Arial, sans-serif" }}>
-            <h2>Đang đăng nhập...</h2>
-            <p>Vui lòng chờ một chút.</p>
+            <h2>Logging in...</h2>
+            <p>Please wait a moment..</p>
         </main>
     );
 }
