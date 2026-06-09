@@ -1,0 +1,9 @@
+function NotificationsPage() {
+  return (
+    <div>
+      <h1>NotificationsPage</h1>
+    </div>
+  );
+}
+
+export default NotificationsPage;

@@ -1,0 +1,195 @@
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "../styles/RegisterPage.css";
+import logoLogin from "../assets/images/logo-login.png";
+import { register } from "../services/authService";
+
+function RegisterPage() {
+    const navigate = useNavigate();
+
+    const [form, setForm] = useState({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        role: "",
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setForm((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleRegister = async (e) => {
+        e.preventDefault();
+
+        if (
+            !form.username.trim() ||
+            !form.email.trim() ||
+            !form.password.trim() ||
+            !form.confirmPassword.trim()
+        ) {
+            alert("Please fill in all the required information");
+            return;
+        }
+
+        if (form.password.length < 8) {
+            alert("Mật khẩu phải có ít nhất 8 ký tự");
+            return;
+        }
+
+        if (form.password !== form.confirmPassword) {
+            alert("Mật khẩu xác nhận không khớp");
+            return;
+        }
+
+        try {
+            if (!form.role) {
+                alert("Please select account type");
+                return;
+            }
+            await register({
+                username: form.username.trim(),
+                email: form.email.trim(),
+                password: form.password,
+                confirmPassword: form.confirmPassword,
+                role: form.role,
+            });
+
+            alert("Đăng ký thành công");
+            navigate("/login");
+        } catch (error) {
+            alert("Đăng ký thất bại: " + error.message);
+        }
+    };
+    return (
+        <div className="register-page">
+            <div className="register-wrapper">
+                <div className="register-left">
+                    <div className="brand-box">
+                        <img src={logoLogin} alt="ScienceTrend Hub Logo" className="brand-logo-img" />
+
+                        <div>
+                            <h2>ScienceTrend Hub</h2>
+                            <p>Scientific Journal Publication Tracking</p>
+                        </div>
+                    </div>
+
+                    <h1>Start Your Research Journey</h1>
+
+                    <p className="register-desc">
+                        Create an account to explore scientific papers, follow research
+                        trends, save your favorite journals, and manage your personal
+                        workspace.
+                    </p>
+
+                    <div className="feature-list">
+                        <div className="feature-item">Track publication trends</div>
+                        <div className="feature-item">Save favorite papers</div>
+                        <div className="feature-item">Explore journals and topics</div>
+                    </div>
+                </div>
+
+                <div className="register-card">
+                    <div className="register-header">
+                        <h2>Create Account</h2>
+                        <p>Please enter your information to register.</p>
+                    </div>
+
+                    <form className="register-form" onSubmit={handleRegister}>
+                        <div className="form-group">
+                            <label htmlFor="username">Username</label>
+                            <input
+                                id="username"
+                                name="username"
+                                type="text"
+                                placeholder="Enter your username"
+                                value={form.username}
+                                onChange={handleChange}
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="email">Email</label>
+                            <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                placeholder="Enter your email"
+                                value={form.email}
+                                onChange={handleChange}
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="password">Password</label>
+                            <input
+                                id="password"
+                                name="password"
+                                type="password"
+                                placeholder="Enter your password"
+                                value={form.password}
+                                onChange={handleChange}
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="confirmPassword">Confirm Password</label>
+                            <input
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                type="password"
+                                placeholder="Confirm your password"
+                                value={form.confirmPassword}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="role" className="role-label">
+                                Account Type
+                            </label>
+
+                            <select
+                                id="role"
+                                name="role"
+                                value={form.role}
+                                onChange={handleChange}
+                                className="role-dropdown"
+                                required
+                            >
+                                <option value="" disabled>
+                                    Select your role
+                                </option>
+
+                                <option value="STUDENT">
+                                    Student
+                                </option>
+
+                                <option value="LECTURER">
+                                    Lecturer
+                                </option>
+
+                                <option value="RESEARCHER">
+                                    Researcher
+                                </option>
+                            </select>
+                        </div>
+
+                        <button type="submit" className="register-btn">
+                            Create Account
+                        </button>
+                    </form>
+
+                    <p className="login-text">
+                        Already have an account?{" "}
+                        <Link to="/login" className="login-link">
+                            Login
+                        </Link>
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default RegisterPage;
