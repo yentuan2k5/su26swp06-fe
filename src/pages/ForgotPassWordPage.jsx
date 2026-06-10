@@ -18,9 +18,9 @@ function ForgotPassWordPage() {
         try {
             setLoading(true);
             const res = await forgotPassword(identifier.trim());
-            alert(res || "Đã gửi link reset password vào email của bạn");
+            alert(res || "Password reset link has been sent to your email.");
         } catch (error) {
-            alert("Gửi email thất bại: " + error.message);
+            alert("Failed to send email: " + error.message);
         } finally {
             setLoading(false);
         }
@@ -36,13 +36,13 @@ function ForgotPassWordPage() {
                     <label>Username or Email</label>
                     <input
                         type="text"
-                        placeholder="Nhập username hoặc email của bạn"
+                        placeholder="Enter your username or email"
                         value={identifier}
                         onChange={(e) => setIdentifier(e.target.value)}
                     />
 
                     <button type="submit" disabled={loading}>
-                        {loading ? "Đang gửi..." : "Send reset link"}
+                        {loading ? "Sending..." : "Send reset link"}
                     </button>
                 </form>
 

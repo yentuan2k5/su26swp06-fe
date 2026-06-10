@@ -26,7 +26,7 @@ function OAuth2CallbackPage() {
     return (
         <main style={{ padding: "40px", fontFamily: "Arial, sans-serif" }}>
             <h2>Logging in...</h2>
-            <p>Please wait a moment..</p>
+            <p>Please wait a moment.</p>
         </main>
     );
 }

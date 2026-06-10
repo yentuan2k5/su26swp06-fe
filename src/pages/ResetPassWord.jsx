@@ -22,27 +22,27 @@ function ResetPassWord() {
         }
 
         if (!newPassword || !confirmPassword) {
-            alert("Vui lòng nhập đầy đủ mật khẩu");
+            alert("Please fill in all password fields");
             return;
         }
 
         if (newPassword.length < 8) {
-            alert("Mật khẩu phải có ít nhất 8 ký tự");
+            alert("Password must be at least 8 characters long");
             return;
         }
 
         if (newPassword !== confirmPassword) {
-            alert("Mật khẩu xác nhận không khớp");
+            alert("Password confirmation does not match");
             return;
         }
 
         try {
             setLoading(true);
             const res = await resetPassword(token, newPassword, confirmPassword);
-            alert(res || "Đổi mật khẩu thành công");
+            alert(res || "Password reset successful");
             navigate("/login");
         } catch (error) {
-            alert("Reset password thất bại: " + error.message);
+            alert("Failed to reset password: " + error.message);
         } finally {
             setLoading(false);
         }
@@ -52,13 +52,13 @@ function ResetPassWord() {
         <main className="reset-page">
             <div className="reset-card">
                 <h2>Reset Password</h2>
-                <p>Nhập mật khẩu mới cho tài khoản của bạn.</p>
+                <p>Enter a new password for your account.</p>
 
                 <form onSubmit={handleResetPassword}>
                     <label>New password</label>
                     <input
                         type="password"
-                        placeholder="Nhập mật khẩu mới"
+                        placeholder="Enter new password"
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
                     />
@@ -66,13 +66,13 @@ function ResetPassWord() {
                     <label>Confirm password</label>
                     <input
                         type="password"
-                        placeholder="Nhập lại mật khẩu mới"
+                        placeholder="Confirm new password"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
 
                     <button type="submit" disabled={loading}>
-                        {loading ? "Đang đổi..." : "Reset password"}
+                        {loading ? "Resetting..." : "Reset password"}
                     </button>
                 </form>
 

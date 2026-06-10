@@ -28,17 +28,20 @@ function LoginPage() {
         localStorage.setItem("user", JSON.stringify(data.user));
       }
 
-      alert("Đăng nhập thành công");
+      alert("Login successful");
       navigate("/dashboard");
     } catch (error) {
-      alert("Đăng nhập thất bại: " + error.message);
+      alert("Login failed: " + error.message);
     }
 
 
   };
 
   const handleGmailLogin = () => {
-    const backendUrl = import.meta.env.VITE_BACKEND_BASE_URL;
+    const backendUrl = (
+      import.meta.env.VITE_BACKEND_BASE_URL || "http://localhost:8080"
+    ).replace(/\/$/, "");
+
     window.location.href = `${backendUrl}/oauth2/authorization/google`;
   };
   return (
