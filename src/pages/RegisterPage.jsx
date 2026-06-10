@@ -14,10 +14,15 @@ function RegisterPage() {
         confirmPassword: "",
         role: "",
     });
+    const [message, setMessage] = useState("");
+    const [messageType, setMessageType] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setForm((prev) => ({ ...prev, [name]: value }));
+        setMessage("");
+        setMessageType("");
     };
 
     const handleRegister = async (e) => {
@@ -44,6 +49,7 @@ function RegisterPage() {
         }
 
         try {
+            setLoading(true);
             if (!form.role) {
                 alert("Please select account type");
                 return;
@@ -56,11 +62,37 @@ function RegisterPage() {
                 role: form.role,
             });
 
-            alert("Registration successful");
+            setMessage("Create account successfully");
+            setMessageType("success");
+
+            setTimeout(() => {
+                navigate("/login");
+            }, 1200);
             navigate("/login");
         } catch (error) {
-            alert("Registration failed: " + error.message);
+            showError(getRegisterErrorMessage(error));
+        } finally {
+            setLoading(false);
         }
+        const showError = (text) => {
+            setMessage(text);
+            setMessageType("error");
+        };
+
+        const getRegisterErrorMessage = (error) => {
+            const rawMessage = error?.message || "";
+            const lowerMessage = rawMessage.toLowerCase();
+
+            if (lowerMessage.includes("email")) {
+                return "Email already exists";
+            }
+
+            if (lowerMessage.includes("username")) {
+                return "Username already exists";
+            }
+
+            return rawMessage || "Registration failed";
+        };
     };
     return (
         <div className="register-page">
@@ -95,7 +127,11 @@ function RegisterPage() {
                         <h2>Create Account</h2>
                         <p>Please enter your information to register.</p>
                     </div>
-
+                    {message && (
+                        <div className={`register-message ${messageType}`}>
+                            {message}
+                        </div>
+                    )}
                     <form className="register-form" onSubmit={handleRegister}>
                         <div className="form-group">
                             <label htmlFor="username">Username</label>
@@ -175,8 +211,8 @@ function RegisterPage() {
                             </select>
                         </div>
 
-                        <button type="submit" className="register-btn">
-                            Create Account
+                        <button type="submit" className="register-btn" disabled={loading}>
+                            {loading ? "Creating..." : "Create Account"}
                         </button>
                     </form>
 
