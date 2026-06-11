@@ -14,15 +14,41 @@ function RegisterPage() {
         confirmPassword: "",
         role: "",
     });
+
     const [message, setMessage] = useState("");
     const [messageType, setMessageType] = useState("");
     const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setForm((prev) => ({ ...prev, [name]: value }));
+
+        setForm((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+
         setMessage("");
         setMessageType("");
+    };
+
+    const showError = (text) => {
+        setMessage(text);
+        setMessageType("error");
+    };
+
+    const getRegisterErrorMessage = (error) => {
+        const rawMessage = error?.message || "";
+        const lowerMessage = rawMessage.toLowerCase();
+
+        if (lowerMessage.includes("email")) {
+            return "Email already exists";
+        }
+
+        if (lowerMessage.includes("username")) {
+            return "Username already exists";
+        }
+
+        return rawMessage || "Registration failed";
     };
 
     const handleRegister = async (e) => {
@@ -34,26 +60,28 @@ function RegisterPage() {
             !form.password.trim() ||
             !form.confirmPassword.trim()
         ) {
-            alert("Please fill in all the required information");
+            showError("Please fill in all the required information");
             return;
         }
 
         if (form.password.length < 8) {
-            alert("The password must be at least 8 characters long.");
+            showError("The password must be at least 8 characters long.");
             return;
         }
 
         if (form.password !== form.confirmPassword) {
-            alert("The password confirmation does not match.");
+            showError("The password confirmation does not match.");
+            return;
+        }
+
+        if (!form.role) {
+            showError("Please select account type");
             return;
         }
 
         try {
             setLoading(true);
-            if (!form.role) {
-                alert("Please select account type");
-                return;
-            }
+
             await register({
                 username: form.username.trim(),
                 email: form.email.trim(),
@@ -68,38 +96,23 @@ function RegisterPage() {
             setTimeout(() => {
                 navigate("/login");
             }, 1200);
-            navigate("/login");
         } catch (error) {
             showError(getRegisterErrorMessage(error));
         } finally {
             setLoading(false);
         }
-        const showError = (text) => {
-            setMessage(text);
-            setMessageType("error");
-        };
-
-        const getRegisterErrorMessage = (error) => {
-            const rawMessage = error?.message || "";
-            const lowerMessage = rawMessage.toLowerCase();
-
-            if (lowerMessage.includes("email")) {
-                return "Email already exists";
-            }
-
-            if (lowerMessage.includes("username")) {
-                return "Username already exists";
-            }
-
-            return rawMessage || "Registration failed";
-        };
     };
+
     return (
         <div className="register-page">
             <div className="register-wrapper">
                 <div className="register-left">
                     <div className="brand-box">
-                        <img src={logoLogin} alt="ScienceTrend Hub Logo" className="brand-logo-img" />
+                        <img
+                            src={logoLogin}
+                            alt="ScienceTrend Hub Logo"
+                            className="brand-logo-img"
+                        />
 
                         <div>
                             <h2>ScienceTrend Hub</h2>
@@ -127,11 +140,13 @@ function RegisterPage() {
                         <h2>Create Account</h2>
                         <p>Please enter your information to register.</p>
                     </div>
+
                     {message && (
                         <div className={`register-message ${messageType}`}>
                             {message}
                         </div>
                     )}
+
                     <form className="register-form" onSubmit={handleRegister}>
                         <div className="form-group">
                             <label htmlFor="username">Username</label>
@@ -180,6 +195,7 @@ function RegisterPage() {
                                 onChange={handleChange}
                             />
                         </div>
+
                         <div className="form-group">
                             <label htmlFor="role" className="role-label">
                                 Account Type
@@ -191,27 +207,21 @@ function RegisterPage() {
                                 value={form.role}
                                 onChange={handleChange}
                                 className="role-dropdown"
-                                required
                             >
                                 <option value="" disabled>
                                     Select your role
                                 </option>
-
-                                <option value="STUDENT">
-                                    Student
-                                </option>
-
-                                <option value="LECTURER">
-                                    Lecturer
-                                </option>
-
-                                <option value="RESEARCHER">
-                                    Researcher
-                                </option>
+                                <option value="STUDENT">Student</option>
+                                <option value="LECTURER">Lecturer</option>
+                                <option value="RESEARCHER">Researcher</option>
                             </select>
                         </div>
 
-                        <button type="submit" className="register-btn" disabled={loading}>
+                        <button
+                            type="submit"
+                            className="register-btn"
+                            disabled={loading}
+                        >
                             {loading ? "Creating..." : "Create Account"}
                         </button>
                     </form>
