@@ -1,0 +1,462 @@
+.st-layout {
+  min-height: 100vh;
+  display: flex;
+  background: #f5f7fb;
+}
+
+/* SIDEBAR */
+
+.st-sidebar {
+  width: 260px;
+  min-height: 100vh;
+  background: #0f172a;
+  color: white;
+  padding: 24px 18px;
+  position: sticky;
+  top: 0;
+}
+
+.st-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.st-logo-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.st-logo h2 {
+  margin: 0;
+  font-size: 18px;
+  color: white;
+}
+
+.st-logo p {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.st-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.st-menu-link {
+  text-decoration: none;
+  color: #cbd5e1;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: 0.2s ease;
+}
+
+.st-menu-link:hover {
+  background: #1e293b;
+  color: white;
+}
+
+.st-menu-link.active {
+  background: #2563eb;
+  color: white;
+}
+
+/* MAIN */
+
+.st-main {
+  flex: 1;
+  min-width: 0;
+}
+
+/* NAVBAR */
+
+.st-navbar {
+  height: 86px;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.st-navbar h1 {
+  margin: 0;
+  font-size: 26px;
+  color: #111827;
+}
+
+.st-navbar p {
+  margin: 4px 0 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.st-navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.st-search-box input {
+  width: 280px;
+  padding: 11px 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  outline: none;
+  color: #111827;
+  background: white;
+}
+
+.st-search-box input:focus {
+  border-color: #2563eb;
+}
+
+.st-user-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.st-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.st-user-box h4 {
+  margin: 0;
+  font-size: 14px;
+  color: #111827;
+}
+
+.st-user-box span {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.st-content {
+  padding: 28px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+  .st-sidebar {
+    width: 220px;
+  }
+
+  .st-search-box {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .st-layout {
+    flex-direction: column;
+  }
+
+  .st-sidebar {
+    width: 100%;
+    min-height: auto;
+    position: relative;
+  }
+
+  .st-menu {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .st-menu-link {
+    white-space: nowrap;
+  }
+
+  .st-navbar {
+    height: auto;
+    padding: 18px;
+    align-items: flex-start;
+    gap: 14px;
+    flex-direction: column;
+  }
+
+  .st-content {
+    padding: 18px;
+  }
+  /* NOTIFICATION */
+
+.st-notification-btn {
+  width: 58px;
+  height: 58px;
+  border-radius: 20px;
+  border: 1px solid #cbd5e1;
+  background: white;
+  cursor: pointer;
+  font-size: 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.st-notification-btn:hover {
+  background: #f8fafc;
+}
+
+.st-notification-btn span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #ef4444;
+  position: absolute;
+  top: 16px;
+  right: 17px;
+}
+
+/* ACCOUNT */
+
+.st-account-wrapper {
+  position: relative;
+}
+
+.st-user-box {
+  border: 1px solid #cbd5e1;
+  background: white;
+  border-radius: 24px;
+  padding: 10px 16px 10px 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  min-width: 230px;
+  transition: 0.2s ease;
+}
+
+.st-user-box:hover {
+  background: #f8fafc;
+  border-color: #93c5fd;
+}
+
+.st-user-info {
+  text-align: left;
+  flex: 1;
+}
+
+.st-account-arrow {
+  color: #64748b;
+  font-size: 16px;
+  transition: 0.2s ease;
+}
+
+.st-account-arrow.open {
+  transform: rotate(180deg);
+}
+
+.st-account-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 230px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 10px;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.14);
+  z-index: 100;
+}
+
+.st-account-dropdown button {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 12px 14px;
+  border-radius: 12px;
+  text-align: left;
+  cursor: pointer;
+  font-weight: 600;
+  color: #111827;
+}
+
+.st-account-dropdown button:hover {
+  background: #f1f5f9;
+}
+
+.st-dropdown-line {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 8px 0;
+}
+
+.st-account-dropdown .st-logout-btn {
+  color: #dc2626;
+}
+
+.st-account-dropdown .st-logout-btn:hover {
+  background: #fef2f2;
+}
+}
+/* FIX CLICK NAVBAR */
+
+.st-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.st-navbar-right {
+  position: relative;
+  z-index: 1000;
+}
+
+.st-notification-btn,
+.st-user-box,
+.st-account-wrapper {
+  pointer-events: auto;
+}
+
+/* NOTIFICATION BUTTON */
+
+.st-notification-btn {
+  width: 58px;
+  height: 58px;
+  border-radius: 20px;
+  border: 1px solid #cbd5e1;
+  background: white;
+  cursor: pointer;
+  font-size: 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.st-notification-btn:hover {
+  background: #f8fafc;
+  border-color: #93c5fd;
+}
+
+.st-notification-btn span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #ef4444;
+  position: absolute;
+  top: 16px;
+  right: 17px;
+}
+
+/* ACCOUNT */
+
+.st-account-wrapper {
+  position: relative;
+}
+
+.st-user-box {
+  border: 1px solid #cbd5e1;
+  background: white;
+  border-radius: 24px;
+  padding: 10px 16px 10px 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  min-width: 250px;
+  transition: 0.2s ease;
+}
+
+.st-user-box:hover {
+  background: #f8fafc;
+  border-color: #93c5fd;
+}
+
+.st-user-info {
+  text-align: left;
+  flex: 1;
+}
+
+.st-user-info h4 {
+  margin: 0;
+  font-size: 16px;
+  color: #0f172a;
+}
+
+.st-user-info span {
+  display: block;
+  margin-top: 2px;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.st-account-arrow {
+  color: #64748b;
+  font-size: 16px;
+  transition: 0.2s ease;
+}
+
+.st-account-arrow.open {
+  transform: rotate(180deg);
+}
+
+.st-account-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 240px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 10px;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.16);
+  z-index: 2000;
+}
+
+.st-account-dropdown button {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 12px 14px;
+  border-radius: 12px;
+  text-align: left;
+  cursor: pointer;
+  font-weight: 700;
+  color: #111827;
+}
+
+.st-account-dropdown button:hover {
+  background: #f1f5f9;
+}
+
+.st-dropdown-line {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 8px 0;
+}
+
+.st-account-dropdown .st-logout-btn {
+  color: #dc2626;
+}
+
+.st-account-dropdown .st-logout-btn:hover {
+  background: #fef2f2;
+}

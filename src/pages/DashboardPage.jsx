@@ -1,13 +1,374 @@
-import React from 'react';
-import '../styles/DashboardPage.css';
+import { useMemo } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import {
+  FiActivity,
+  FiBarChart2,
+  FiBell,
+  FiBookOpen,
+  FiBookmark,
+  FiDatabase,
+  FiFileText,
+  FiGrid,
+  FiLogOut,
+  FiSearch,
+  FiSettings,
+  FiTrendingUp,
+  
+} from "react-icons/fi";
+
+import logo from "../assets/images/logo-login.png";
+import "../styles/DashboardPage.css";
+
+const stats = [
+  {
+    title: "Total Papers",
+    value: "128.4K",
+    desc: "+12.8% this month",
+    icon: FiFileText,
+  },
+  {
+    title: "Active Journals",
+    value: "4,832",
+    desc: "+7.2% tracked sources",
+    icon: FiBookOpen,
+  },
+  {
+    title: "Saved Library",
+    value: "1,248",
+    desc: "+18.5% bookmarks",
+    icon: FiBookmark,
+  },
+  {
+    title: "Trend Signals",
+    value: "326",
+    desc: "+24.1% hot topics",
+    icon: FiActivity,
+  },
+];
+
+const navItems = [
+  { path: "/dashboard", label: "Dashboard", icon: FiGrid },
+  { path: "/papers", label: "Papers", icon: FiFileText },
+  { path: "/trends", label: "Trends", icon: FiTrendingUp },
+  { path: "/library", label: "Library", icon: FiBookmark },
+  { path: "/reports", label: "Reports", icon: FiBarChart2 },
+  { path: "/notifications", label: "Notifications", icon: FiBell },
+];
+
+const chartData = [
+  { year: "2020", value: 42 },
+  { year: "2021", value: 55 },
+  { year: "2022", value: 64 },
+  { year: "2023", value: 78 },
+  { year: "2024", value: 90 },
+  { year: "2025", value: 84 },
+  { year: "2026", value: 96 },
+];
+
+const topics = [
+  { name: "Artificial Intelligence", papers: "24.8K papers", growth: "+32%", percent: 92 },
+  { name: "Machine Learning", papers: "18.2K papers", growth: "+28%", percent: 84 },
+  { name: "Cybersecurity", papers: "12.9K papers", growth: "+21%", percent: 72 },
+  { name: "Medical Imaging", papers: "9.7K papers", growth: "+16%", percent: 64 },
+];
+
+const recentPapers = [
+  {
+    title: "Large Language Models for Scientific Knowledge Discovery",
+    source: "Nature AI Research Group",
+    tag: "Hot",
+  },
+  {
+    title: "Explainable Deep Learning in Healthcare Analytics",
+    source: "Journal of Medical Systems",
+    tag: "Review",
+  },
+  {
+    title: "Graph Neural Networks for Citation Prediction",
+    source: "ACM Computing Surveys",
+    tag: "New",
+  },
+];
+
+function getUserFromStorage() {
+  try {
+    return JSON.parse(localStorage.getItem("user")) || null;
+  } catch {
+    return null;
+  }
+}
+
 function DashboardPage() {
-    return (
-        <div>
-            <h1>DashboardPage</h1>
-            <img src="data:image/jpeg;base64,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" alt="Dashboard" />
-            <p>Welcome to the ScienceTrend Hub Dashboard! Here you can access various features and insights related to scientific research trends.</p>
+  const navigate = useNavigate();
+
+  const user = useMemo(() => getUserFromStorage(), []);
+  const displayName = user?.username || user?.name || user?.email || "Researcher";
+
+  const avatarText = displayName
+    .split(" ")
+    .map((word) => word[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+
+  function handleLogout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("user");
+    navigate("/login");
+  }
+
+  return (
+    <main className="dashboard">
+      <aside className="dashboard-sidebar">
+        <div className="dashboard-logo">
+          <img src={logo} alt="ScienceTrend Hub" />
+          <div>
+            <h2>ScienceTrend</h2>
+            <p>Research Hub</p>
+          </div>
         </div>
-    );
+
+        <nav className="dashboard-menu">
+          {navItems.map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                className={({ isActive }) =>
+                  isActive ? "menu-item active" : "menu-item"
+                }
+              >
+                <Icon />
+                <span>{item.label}</span>
+              </NavLink>
+            );
+          })}
+        </nav>
+
+        <div className="ai-box">
+          <FiDatabase />
+          <h3>Smart Research AI</h3>
+          <p>Analyze papers, detect hot topics and generate reports faster.</p>
+          <button type="button">Explore AI</button>
+        </div>
+      </aside>
+
+      <section className="dashboard-main">
+        <header className="dashboard-header">
+          <div>
+            <span className="small-title">Research overview</span>
+            <h1>Welcome back, {displayName}</h1>
+            <p>
+              Track scientific papers, journals and research trends in one dashboard.
+            </p>
+          </div>
+
+          <div className="header-actions">
+            <label className="search-box">
+              <FiSearch />
+              <input placeholder="Search papers, journals, topics..." />
+            </label>
+
+            <button className="icon-button" type="button">
+              <FiBell />
+              <span></span>
+            </button>
+
+            <div className="profile-card">
+              <div className="avatar">{avatarText || "R"}</div>
+              <div>
+                <strong>{displayName}</strong>
+                <small>{user?.role || "Research member"}</small>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <section className="hero-section">
+          <div className="hero-card">
+            <div>
+              <span className="hero-badge">AI Powered Analytics</span>
+              <h2>Discover research trends before they become popular.</h2>
+              <p>
+                Monitor publication growth, trending fields, saved papers and
+                weekly reports with a cleaner and more modern dashboard.
+              </p>
+
+              <div className="hero-buttons">
+                <NavLink to="/trends" className="primary-btn">
+                  View Trends
+                </NavLink>
+                <NavLink to="/papers" className="secondary-btn">
+                  Browse Papers
+                </NavLink>
+              </div>
+            </div>
+
+            <div className="hero-visual">
+              <div className="score-circle">
+                <strong>92%</strong>
+                <span>Trend Match</span>
+              </div>
+
+              <div className="floating-card top">
+                <FiTrendingUp />
+                <span>AI +32%</span>
+              </div>
+
+              <div className="floating-card bottom">
+                <FiBookOpen />
+                <span>4.8K Journals</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="deadline-card">
+            <div className="card-title">
+              <div>
+                <span className="small-title">Upcoming</span>
+                <h3>Weekly Report</h3>
+              </div>
+              <FiSettings />
+            </div>
+
+            <strong>Friday, 09:00 AM</strong>
+            <p>Your science trend report is ready to export.</p>
+            <button type="button">Generate Report</button>
+          </div>
+        </section>
+
+        <section className="stats-grid">
+          {stats.map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <article className="stat-card" key={item.title}>
+                <div className="stat-icon">
+                  <Icon />
+                </div>
+
+                <div>
+                  <p>{item.title}</p>
+                  <h3>{item.value}</h3>
+                  <span>{item.desc}</span>
+                </div>
+              </article>
+            );
+          })}
+        </section>
+
+        <section className="content-grid">
+          <article className="panel chart-panel">
+            <div className="panel-header">
+              <div>
+                <span className="small-title">Analytics</span>
+                <h3>Publication Growth</h3>
+              </div>
+
+              <button type="button">2020 - 2026</button>
+            </div>
+
+            <div className="chart">
+              {chartData.map((item) => (
+                <div className="chart-item" key={item.year}>
+                  <div className="bar-wrap">
+                    <span style={{ height: `${item.value}%` }}></span>
+                  </div>
+                  <small>{item.year}</small>
+                </div>
+              ))}
+            </div>
+          </article>
+
+          <article className="panel">
+            <div className="panel-header">
+              <div>
+                <span className="small-title">Hot Topics</span>
+                <h3>Trending Fields</h3>
+              </div>
+
+              <NavLink to="/trends">See all</NavLink>
+            </div>
+
+            <div className="topic-list">
+              {topics.map((topic, index) => (
+                <div className="topic-row" key={topic.name}>
+                  <span className="rank">0{index + 1}</span>
+
+                  <div className="topic-info">
+                    <strong>{topic.name}</strong>
+                    <small>{topic.papers}</small>
+
+                    <div className="progress">
+                      <span style={{ width: `${topic.percent}%` }}></span>
+                    </div>
+                  </div>
+
+                  <em>{topic.growth}</em>
+                </div>
+              ))}
+            </div>
+          </article>
+        </section>
+
+        <section className="bottom-grid">
+          <article className="panel">
+            <div className="panel-header">
+              <div>
+                <span className="small-title">Latest Papers</span>
+                <h3>Recently Indexed</h3>
+              </div>
+
+              <NavLink to="/papers">Open papers</NavLink>
+            </div>
+
+            <div className="paper-list">
+              {recentPapers.map((paper) => (
+                <div className="paper-card" key={paper.title}>
+                  <div>
+                    <strong>{paper.title}</strong>
+                    <p>{paper.source}</p>
+                  </div>
+
+                  <span>{paper.tag}</span>
+                </div>
+              ))}
+            </div>
+          </article>
+
+          <article className="panel quick-panel">
+            <div className="panel-header">
+              <div>
+                <span className="small-title">Quick Actions</span>
+                <h3>Workspace Tools</h3>
+              </div>
+            </div>
+
+            <div className="quick-actions">
+              <NavLink to="/library">
+                <FiBookmark /> Save Paper
+              </NavLink>
+
+              <NavLink to="/reports">
+                <FiBarChart2 /> Create Report
+              </NavLink>
+
+              <NavLink to="/trends">
+                <FiTrendingUp /> Check Trends
+              </NavLink>
+
+              <button type="button" onClick={handleLogout}>
+                <FiLogOut /> Logout
+              </button>
+            </div>
+          </article>
+        </section>
+      </section>
+    </main>
+  );
 }
 
 export default DashboardPage;
