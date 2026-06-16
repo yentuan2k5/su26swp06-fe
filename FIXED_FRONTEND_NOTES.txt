@@ -1,0 +1,44 @@
+FRONTEND FIXED TO MATCH BACKEND
+
+Backend auth base endpoint:
+- Backend uses /api/auth
+- Frontend .env was changed from http://localhost:8080/apiservices to http://localhost:8080/api
+
+Fixed files:
+1. .env
+   VITE_API_BASE_URL=http://localhost:8080/api
+
+2. src/services/authService.js
+   - login sends: { username, password }
+   - register sends: { username, email, password, confirmPassword, role }
+   - forgotPassword sends: { identifier }
+   - resetPassword sends: { token, newPassword, confirmPassword }
+
+3. src/pages/RegisterPage.jsx
+   - Added confirmPassword to register API payload
+   - Fixed role values to match backend enum: STUDENT, LECTURER, RESEARCHER
+   - Added min 8 password validation
+
+4. src/pages/ForgotPassWordPage.jsx
+   - Backend needs identifier, not email
+   - Input now accepts username or email
+
+5. src/pages/ResetPassWord.jsx
+   - Added confirmPassword to reset password API payload
+   - Added min 8 password validation
+
+6. src/pages/LoginPage.jsx
+   - Saves token, refreshToken and user after login
+
+7. src/pages/OAuth2CallbackPage.jsx + routes
+   - Added /oauth2/callback route
+   - Stores Google login token from URL query parameter
+
+Checked:
+- npm install completed
+- npm run build completed successfully
+
+How to run:
+cd sciencetrend-hub-frontend
+npm install
+npm run dev

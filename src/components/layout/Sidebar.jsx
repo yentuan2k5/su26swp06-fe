@@ -1,0 +1,79 @@
+import { NavLink } from "react-router-dom";
+import {
+  FiBarChart2,
+  FiBell,
+  FiBookmark,
+  FiFileText,
+  FiGrid,
+  FiSettings,
+  FiTrendingUp,
+} from "react-icons/fi";
+import logo from "../../assets/images/logo-login.png";
+import { ROUTE_PATHS } from "../../routes/routePaths";
+import "../../styles/layout.css";
+
+const menuItems = [
+  { label: "Dashboard", path: ROUTE_PATHS.DASHBOARD, icon: FiGrid },
+  { label: "Papers", path: ROUTE_PATHS.PAPERS, icon: FiFileText },
+  { label: "Trends", path: ROUTE_PATHS.TRENDS, icon: FiTrendingUp },
+  { label: "Library", path: ROUTE_PATHS.LIBRARY, icon: FiBookmark },
+  { label: "Reports", path: ROUTE_PATHS.REPORTS, icon: FiBarChart2 },
+  {
+    label: "Notifications",
+    path: ROUTE_PATHS.NOTIFICATIONS,
+    icon: FiBell,
+  },
+  { label: "Admin", path: ROUTE_PATHS.ADMIN, icon: FiSettings },
+];
+
+function Sidebar({ isOpen = false, onNavigate }) {
+  return (
+    <aside className={`st-sidebar ${isOpen ? "is-open" : ""}`}>
+      <NavLink
+        to={ROUTE_PATHS.DASHBOARD}
+        className="st-brand"
+        onClick={onNavigate}
+      >
+        <span className="st-brand-logo">
+          <img src={logo} alt="" />
+        </span>
+        <span>
+          <strong>ScienceTrend</strong>
+          <small>Research Hub</small>
+        </span>
+      </NavLink>
+
+      <div className="st-menu-label">Workspace</div>
+
+      <nav className="st-menu" aria-label="Main navigation">
+        {menuItems.map((item) => {
+          const Icon = item.icon;
+
+          return (
+            <NavLink
+              key={item.path}
+              to={item.path}
+              onClick={onNavigate}
+              className={({ isActive }) =>
+                `st-menu-link ${isActive ? "active" : ""}`
+              }
+            >
+              <Icon aria-hidden="true" />
+              <span>{item.label}</span>
+            </NavLink>
+          );
+        })}
+      </nav>
+
+      <div className="st-sidebar-footer">
+        <span className="st-status-dot" />
+        <div>
+          <strong>System online</strong>
+          <small>Data updated recently</small>
+        </div>
+      </div>
+    </aside>
+  );
+}
+
+export default Sidebar;
