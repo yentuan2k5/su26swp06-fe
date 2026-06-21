@@ -1,0 +1,42 @@
+ScienceTrend Hub frontend fixes
+
+Main changes:
+1. Added a public Home page at `/`.
+   - Users now see the ScienceTrend Hub introduction first.
+   - Login button goes to `/login`.
+   - If a user is already logged in, the Home CTA opens the correct workspace route.
+
+2. Reworked authentication and role logic.
+   - Added AuthProvider/useAuth.
+   - Role is read from backend login response, JWT payload, OAuth query, or stored user data.
+   - ADMIN is detected only from normalized backend/JWT roles such as ADMIN, ROLE_ADMIN, or arrays of authorities.
+   - Student/Lecturer/Researcher users cannot see the Admin menu and cannot open `/admin`.
+   - Admin users are redirected to `/admin` after login; normal users go to `/dashboard`.
+
+3. Added real protected routing rules.
+   - Public pages: `/`, `/login`, `/register`, `/forgot-password`, `/reset-password`.
+   - Authenticated pages: dashboard, papers, trends, library, reports, notifications.
+   - Admin-only page: `/admin`.
+
+4. Improved dashboard/admin content and charts.
+   - ChartBox now handles empty backend data safely.
+   - Dashboard no longer crashes when stats are primitive numbers.
+   - Admin page now includes system stats, publication chart and user-role chart if backend returns role distribution.
+
+5. Cleaned auth forms.
+   - Removed alert popups from forgot/reset password.
+   - Added inline success/error messages.
+   - Register now navigates back to login with a success message.
+   - Login shows incorrect username/password inline instead of popup.
+
+6. Reduced hardcoded fake business numbers.
+   - UI labels remain static because they describe modules.
+   - Backend-driven pages show data only when backend returns it; otherwise they show empty states.
+
+Validation:
+- npm run lint: passed
+- npm run build: passed
+
+Run:
+1. npm install
+2. npm run dev
