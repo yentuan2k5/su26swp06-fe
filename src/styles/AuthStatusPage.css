@@ -1,0 +1,88 @@
+/* ─── Auth Status Page ─── */
+.auth-status-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(30, 127, 145, 0.08), transparent 50%),
+    radial-gradient(ellipse at 100% 100%, rgba(196, 127, 42, 0.06), transparent 50%),
+    var(--st-bg);
+}
+
+.auth-status-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 36px;
+  border: 1px solid var(--st-border);
+  border-radius: var(--st-radius-xl);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: var(--st-shadow-lg);
+  text-align: center;
+}
+
+.auth-status-card img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin: 0 auto 18px;
+  border: 1px solid var(--st-border);
+  border-radius: 13px;
+  padding: 6px;
+  background: #ffffff;
+  box-shadow: var(--st-shadow-sm);
+}
+
+.auth-status-kicker {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 10px;
+  border: 1px solid rgba(30, 127, 145, 0.16);
+  border-radius: 999px;
+  color: var(--st-primary);
+  background: var(--st-primary-soft);
+  font-size: 11px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.auth-status-card h2 {
+  margin: 14px 0 7px;
+  color: var(--st-heading);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.auth-status-card p {
+  margin: 0;
+  color: var(--st-muted);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.auth-status-card a {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 22px;
+  padding: 0 18px;
+  border: none;
+  border-radius: var(--st-radius-sm);
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--st-primary), var(--st-primary-strong));
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(30, 127, 145, 0.22);
+  transition: opacity 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+}
+
+.auth-status-card a:hover {
+  opacity: 0.92;
+  box-shadow: 0 6px 20px rgba(30, 127, 145, 0.3);
+  transform: translateY(-1px);
+}
