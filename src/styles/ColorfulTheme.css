@@ -1,0 +1,510 @@
+/* ColorfulTheme.css
+   Final visual pass: more colorful headings, cards, buttons and workspace panels.
+   This file is intentionally UI-only. It does not change routes, API calls, auth, or data logic. */
+
+:root {
+  --st-primary: #0891b2;
+  --st-primary-strong: #0e7490;
+  --st-primary-dark: #164e63;
+  --st-primary-soft: #e0faff;
+  --st-accent: #f97316;
+  --st-accent-soft: #fff3e6;
+  --st-violet: #7c3aed;
+  --st-violet-soft: #f3e8ff;
+  --st-pink: #ec4899;
+  --st-pink-soft: #fdf2f8;
+  --st-blue: #2563eb;
+  --st-blue-soft: #eff6ff;
+  --st-emerald: #10b981;
+  --st-emerald-soft: #ecfdf5;
+  --st-sky: #06b6d4;
+  --st-amber: #f59e0b;
+  --st-heading: #111827;
+  --st-text: #334155;
+  --st-muted: #817568;
+  --st-muted-strong: #62594d;
+  --st-bg: #f8f4ff;
+  --st-bg-2: #eefaff;
+  --st-rainbow: linear-gradient(120deg, #06b6d4 0%, #2563eb 28%, #7c3aed 56%, #ec4899 78%, #f97316 100%);
+  --st-ocean-fire: linear-gradient(135deg, #06b6d4 0%, #0ea5e9 32%, #7c3aed 68%, #f97316 100%);
+  --st-soft-rainbow: linear-gradient(135deg, rgba(224, 250, 255, .86), rgba(243, 232, 255, .82) 48%, rgba(255, 243, 230, .88));
+}
+
+body {
+  background:
+    radial-gradient(circle at 0% 0%, rgba(6, 182, 212, .18), transparent 28rem),
+    radial-gradient(circle at 86% 8%, rgba(124, 58, 237, .16), transparent 31rem),
+    radial-gradient(circle at 96% 86%, rgba(249, 115, 22, .15), transparent 30rem),
+    linear-gradient(180deg, #fffaff 0%, #f4fbff 48%, #fff7ed 100%);
+}
+
+::selection { background: #7c3aed; color: #fff; }
+
+/* Main app shell */
+.st-layout {
+  background:
+    radial-gradient(circle at 72% 4%, rgba(6, 182, 212, .15), transparent 25rem),
+    radial-gradient(circle at 98% 70%, rgba(236, 72, 153, .10), transparent 27rem),
+    linear-gradient(180deg, #fffaff 0%, #f5fcff 50%, #fff8ef 100%);
+}
+
+.st-sidebar {
+  background:
+    radial-gradient(circle at 16% 6%, rgba(34, 211, 238, .34), transparent 15rem),
+    radial-gradient(circle at 96% 58%, rgba(168, 85, 247, .22), transparent 16rem),
+    radial-gradient(circle at 20% 100%, rgba(249, 115, 22, .20), transparent 13rem),
+    linear-gradient(180deg, #06283d 0%, #072938 42%, #16173f 100%);
+}
+
+.st-brand-logo,
+.home-brand-logo {
+  border-color: rgba(34, 211, 238, .34);
+  box-shadow: 0 14px 35px rgba(6, 182, 212, .25), 0 0 0 6px rgba(124, 58, 237, .05);
+}
+
+.st-brand strong,
+.home-brand strong {
+  background: linear-gradient(90deg, #ffffff, #bdf5ff 48%, #ffd7a8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent;
+}
+
+.st-menu-label {
+  color: #a5f3fc;
+  opacity: .72;
+}
+
+.st-menu-link {
+  color: rgba(240, 249, 255, .70);
+}
+
+.st-menu-link:hover {
+  color: #fff;
+  background: linear-gradient(90deg, rgba(6, 182, 212, .14), rgba(124, 58, 237, .13));
+}
+
+.st-menu-link.active {
+  border-color: rgba(255, 255, 255, .18);
+  background: linear-gradient(135deg, #06b6d4 0%, #2563eb 48%, #7c3aed 100%);
+  box-shadow: 0 16px 34px rgba(37, 99, 235, .22), inset 0 1px 0 rgba(255,255,255,.22);
+}
+
+.st-menu-link.active::before {
+  background: linear-gradient(180deg, #facc15, #fb7185, #22d3ee);
+  box-shadow: 0 0 22px rgba(34, 211, 238, .75);
+}
+
+.st-sidebar-footer {
+  border-color: rgba(125, 211, 252, .18);
+  background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(124, 58, 237, .10));
+}
+
+.st-status-dot {
+  background: #22c55e;
+  box-shadow: 0 0 0 5px rgba(34, 197, 94, .17), 0 0 18px rgba(34, 197, 94, .46);
+}
+
+/* Navbar / dropdown */
+.st-navbar {
+  background: rgba(255, 255, 255, .82);
+  border-bottom-color: rgba(226, 232, 240, .85);
+  box-shadow: 0 12px 32px rgba(37, 99, 235, .06);
+}
+
+.st-navbar-heading h1,
+.workspace-toolbar-copy h2,
+.db-welcome-row h2,
+.account-hero-copy h2,
+.home-section-heading h2,
+.home-workflow-copy h2,
+.auth-card-header h2,
+.register-header h2,
+.forgot-header h2,
+.reset-header h2 {
+  background: linear-gradient(110deg, #111827 0%, #0e7490 28%, #2563eb 54%, #7c3aed 75%, #ec4899 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent;
+}
+
+.st-search-form {
+  border-color: rgba(14, 165, 233, .22);
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    var(--st-rainbow) border-box;
+  border: 1px solid transparent;
+  box-shadow: 0 12px 30px rgba(37, 99, 235, .08);
+}
+
+.st-search-form span {
+  color: #7c3aed;
+  background: #f3e8ff;
+}
+
+.st-icon-btn {
+  color: #fff;
+  border-color: rgba(255,255,255,.18);
+  background: linear-gradient(135deg, #111827, #1e293b 56%, #7c3aed);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, .16);
+}
+
+.st-notification-dot {
+  background: linear-gradient(135deg, #f97316, #ec4899);
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, .18), 0 0 22px rgba(236, 72, 153, .30);
+}
+
+.st-account-trigger {
+  color: #fff;
+  border-color: rgba(255,255,255,.20);
+  background: linear-gradient(135deg, #111827 0%, #164e63 46%, #7c3aed 100%);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, .18);
+}
+.st-account-trigger .st-user-copy strong,
+.st-account-trigger .st-user-copy small,
+.st-account-trigger .st-account-chevron { color: #fff !important; opacity: .95; }
+.st-account-trigger .st-user-copy small { opacity: .72; }
+.st-account-trigger .st-avatar {
+  background: linear-gradient(135deg, #06b6d4, #2563eb 58%, #a855f7);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.24), 0 10px 20px rgba(6, 182, 212, .22);
+}
+
+.st-account-menu {
+  border-color: rgba(125, 211, 252, .32);
+  background:
+    radial-gradient(circle at 16% 6%, rgba(34, 211, 238, .14), transparent 14rem),
+    radial-gradient(circle at 92% 0%, rgba(236, 72, 153, .12), transparent 14rem),
+    #ffffff;
+}
+.st-account-summary {
+  background: linear-gradient(135deg, #e0faff 0%, #f3e8ff 52%, #fff3e6 100%);
+}
+.st-account-menu button:hover {
+  color: #2563eb;
+  background: linear-gradient(90deg, rgba(224, 250, 255, .82), rgba(243, 232, 255, .78));
+}
+
+/* Shared colorful cards and buttons */
+.db-welcome-row,
+.workspace-toolbar,
+.account-hero-card {
+  background:
+    radial-gradient(circle at 5% 0%, rgba(34, 211, 238, .25), transparent 26rem),
+    radial-gradient(circle at 82% 6%, rgba(168, 85, 247, .18), transparent 26rem),
+    radial-gradient(circle at 100% 100%, rgba(249, 115, 22, .15), transparent 24rem),
+    rgba(255, 255, 255, .92);
+  border-color: rgba(125, 211, 252, .30);
+  box-shadow: 0 20px 58px rgba(37, 99, 235, .08), 0 12px 30px rgba(249, 115, 22, .05);
+}
+
+.db-welcome-row::after,
+.workspace-toolbar::after {
+  height: 5px;
+  background: linear-gradient(90deg, #06b6d4, #2563eb, #7c3aed, #ec4899, #f97316);
+  box-shadow: 0 0 24px rgba(124, 58, 237, .26);
+}
+
+.db-eyebrow,
+.account-eyebrow,
+.home-eyebrow,
+.workspace-panel-header span,
+.db-range-badge,
+.db-panel-header-link {
+  color: #0e7490;
+  background: linear-gradient(90deg, #e0faff, #f3e8ff);
+  border-color: rgba(14, 165, 233, .18);
+}
+
+.db-eyebrow,
+.account-eyebrow {
+  color: #0e7490;
+}
+
+.db-refresh-btn,
+.workspace-button.primary,
+.cm-btn-primary,
+.home-login-link,
+.home-primary-link,
+.home-footer a,
+.account-refresh-btn {
+  color: #fff !important;
+  border-color: rgba(255,255,255,.16);
+  background: linear-gradient(135deg, #06b6d4 0%, #2563eb 48%, #7c3aed 78%, #ec4899 100%) !important;
+  box-shadow: 0 18px 40px rgba(37, 99, 235, .20), 0 6px 20px rgba(236, 72, 153, .10);
+}
+
+.db-refresh-btn:hover:not(:disabled),
+.workspace-button.primary:hover:not(:disabled),
+.cm-btn-primary:hover:not(:disabled),
+.home-login-link:hover,
+.home-primary-link:hover,
+.account-refresh-btn:hover:not(:disabled) {
+  box-shadow: 0 22px 50px rgba(37, 99, 235, .24), 0 10px 26px rgba(236, 72, 153, .14);
+}
+
+.workspace-button:not(.primary),
+.cm-btn-ghost,
+.home-ghost-link,
+.home-secondary-link,
+.account-actions a {
+  border-color: rgba(14, 165, 233, .20);
+  background: linear-gradient(180deg, #ffffff, #f8fbff);
+}
+.workspace-button:not(.primary):hover,
+.cm-btn-ghost:hover,
+.home-ghost-link:hover,
+.home-secondary-link:hover,
+.account-actions a:hover {
+  color: #2563eb;
+  border-color: rgba(124, 58, 237, .28);
+  background: linear-gradient(90deg, #e0faff, #f3e8ff);
+}
+
+/* Dashboard */
+.db-stats-grid {
+  gap: 20px;
+}
+.db-stat-card,
+.db-panel,
+.workspace-panel,
+.workspace-report-card,
+.account-panel,
+.home-feature-card,
+.home-workflow-item {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(226, 232, 240, .95);
+  background: rgba(255,255,255,.94);
+}
+.db-stat-card::before,
+.db-panel::before,
+.workspace-panel::before,
+.workspace-report-card::before,
+.account-panel::before,
+.home-feature-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 5px;
+  background: var(--st-rainbow);
+  opacity: .82;
+}
+.db-stat-card > *,
+.db-panel > *,
+.workspace-panel > *,
+.workspace-report-card > *,
+.account-panel > *,
+.home-feature-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.db-stat-card:nth-child(1) {
+  background: linear-gradient(160deg, rgba(224,250,255,.88), #fff 48%);
+  border-color: rgba(6, 182, 212, .24);
+}
+.db-stat-card:nth-child(2) {
+  background: linear-gradient(160deg, rgba(239,246,255,.92), #fff 48%);
+  border-color: rgba(37, 99, 235, .22);
+}
+.db-stat-card:nth-child(3) {
+  background: linear-gradient(160deg, rgba(243,232,255,.92), #fff 48%);
+  border-color: rgba(124, 58, 237, .24);
+}
+.db-stat-card:nth-child(4) {
+  background: linear-gradient(160deg, rgba(255,243,230,.92), #fff 48%);
+  border-color: rgba(249, 115, 22, .24);
+}
+.db-stat-card:nth-child(1) .db-stat-icon { color: #0891b2; background: #cffafe; }
+.db-stat-card:nth-child(2) .db-stat-icon { color: #2563eb; background: #dbeafe; }
+.db-stat-card:nth-child(3) .db-stat-icon { color: #7c3aed; background: #ede9fe; }
+.db-stat-card:nth-child(4) .db-stat-icon { color: #f97316; background: #ffedd5; }
+.db-stat-card:nth-child(1)::before { background: linear-gradient(90deg, #06b6d4, #22d3ee); }
+.db-stat-card:nth-child(2)::before { background: linear-gradient(90deg, #2563eb, #06b6d4); }
+.db-stat-card:nth-child(3)::before { background: linear-gradient(90deg, #7c3aed, #ec4899); }
+.db-stat-card:nth-child(4)::before { background: linear-gradient(90deg, #f97316, #facc15); }
+
+.db-stat-card p {
+  color: #475569;
+}
+.db-stat-card strong {
+  background: linear-gradient(120deg, #0f172a, #0e7490 38%, #7c3aed 78%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent;
+}
+
+.db-panel {
+  box-shadow: 0 16px 44px rgba(37, 99, 235, .08);
+}
+.db-panel-header h2,
+.workspace-panel-header h2,
+.workspace-report-card h3,
+.account-panel-header h3,
+.account-side-panel h3,
+.home-feature-card h3 {
+  background: linear-gradient(110deg, #111827, #2563eb 58%, #ec4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent;
+}
+
+.db-chart-track {
+  background:
+    linear-gradient(180deg, rgba(14, 165, 233, .10), transparent),
+    repeating-linear-gradient(90deg, rgba(148, 163, 184, .12) 0, rgba(148, 163, 184, .12) 1px, transparent 1px, transparent 48px);
+}
+.db-chart-bar {
+  background: linear-gradient(180deg, #22d3ee 0%, #06b6d4 46%, #7c3aed 100%) !important;
+  box-shadow: 0 10px 26px rgba(6, 182, 212, .24);
+}
+.db-chart-column:nth-child(3n+2) .db-chart-bar { background: linear-gradient(180deg, #60a5fa, #2563eb 58%, #7c3aed) !important; }
+.db-chart-column:nth-child(3n+3) .db-chart-bar { background: linear-gradient(180deg, #fb7185, #ec4899 50%, #f97316) !important; }
+.db-chart-column:nth-child(3n+4) .db-chart-bar { background: linear-gradient(180deg, #34d399, #06b6d4 60%, #2563eb) !important; }
+.db-chart-value { color: #7c3aed; }
+
+.db-paper-card,
+.workspace-notification,
+.account-detail-row {
+  border-color: rgba(14, 165, 233, .15);
+  background: linear-gradient(135deg, #ffffff 0%, #fbfdff 55%, #fff7ed 100%);
+}
+.db-paper-card:hover,
+.workspace-notification:hover,
+.account-detail-row:hover {
+  border-color: rgba(124, 58, 237, .26);
+  box-shadow: 0 14px 32px rgba(37, 99, 235, .08);
+}
+.db-paper-tag,
+.db-paper-source {
+  color: #0e7490;
+  background: #e0faff;
+}
+
+/* Workspace pages */
+.workspace-toolbar-copy p,
+.db-welcome-row p,
+.st-navbar-heading p {
+  color: #6b5f56;
+}
+.workspace-search,
+.workspace-select,
+.cm-input {
+  border-color: rgba(14, 165, 233, .20);
+  box-shadow: 0 10px 24px rgba(37, 99, 235, .05);
+}
+.workspace-search:focus,
+.workspace-select:focus,
+.cm-input:focus {
+  border-color: rgba(124, 58, 237, .42);
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, .12), 0 10px 24px rgba(37, 99, 235, .06);
+}
+.workspace-report-meta span,
+.workspace-status,
+.db-stat-change.positive {
+  color: #047857;
+  background: #d1fae5;
+}
+.workspace-status.pending,
+.db-stat-change.negative {
+  color: #c2410c;
+  background: #ffedd5;
+}
+.workspace-notice.info,
+.account-notice {
+  color: #1d4ed8;
+  background: linear-gradient(90deg, #dbeafe, #f3e8ff);
+  border-color: rgba(37, 99, 235, .18);
+}
+
+/* My Account */
+.account-hero-bg {
+  background:
+    radial-gradient(circle at 8% 8%, rgba(34, 211, 238, .32), transparent 24rem),
+    radial-gradient(circle at 66% 0%, rgba(168, 85, 247, .22), transparent 24rem),
+    radial-gradient(circle at 100% 96%, rgba(249, 115, 22, .20), transparent 24rem),
+    linear-gradient(135deg, rgba(255,255,255,.92), rgba(248,250,255,.74));
+}
+.account-avatar-xl {
+  background: linear-gradient(135deg, #06b6d4 0%, #2563eb 42%, #7c3aed 72%, #ec4899 100%);
+  box-shadow: 0 26px 58px rgba(124, 58, 237, .20), 0 10px 28px rgba(6, 182, 212, .18);
+}
+.account-detail-icon,
+.account-panel-header > svg,
+.home-feature-card > span,
+.workspace-notification-icon {
+  color: #fff;
+  background: linear-gradient(135deg, #06b6d4, #2563eb 50%, #7c3aed);
+  box-shadow: 0 12px 24px rgba(37, 99, 235, .14);
+}
+.account-actions a:nth-child(2) svg,
+.account-detail-row:nth-child(2) .account-detail-icon {
+  background: linear-gradient(135deg, #ec4899, #f97316);
+}
+
+/* Home/Auth get color without damaging readability */
+.home-page {
+  background:
+    radial-gradient(circle at 4% 8%, rgba(34,211,238,.20), transparent 32rem),
+    radial-gradient(circle at 98% 12%, rgba(236,72,153,.15), transparent 30rem),
+    radial-gradient(circle at 80% 92%, rgba(249,115,22,.16), transparent 30rem),
+    linear-gradient(180deg, #fffaff 0%, #eefaff 48%, #fff7ed 100%);
+}
+.home-navbar {
+  background: rgba(255,255,255,.86);
+}
+.home-nav-links a:hover {
+  color: #7c3aed;
+  background: linear-gradient(90deg, #e0faff, #f3e8ff);
+}
+.home-hero {
+  background:
+    radial-gradient(circle at 84% 12%, rgba(34, 211, 238, .24), transparent 24rem),
+    radial-gradient(circle at 35% 100%, rgba(236, 72, 153, .20), transparent 24rem),
+    linear-gradient(135deg, #091b3a 0%, #063d56 38%, #283089 68%, #711d72 100%);
+}
+.home-hero .home-eyebrow {
+  color: #e0faff;
+  border-color: rgba(224,250,255,.28);
+  background: rgba(255,255,255,.10);
+}
+.home-bars span:nth-child(odd) { background: linear-gradient(180deg, #22d3ee, #2563eb); }
+.home-bars span:nth-child(even) { background: linear-gradient(180deg, #fb7185, #f97316); }
+.home-feature-card:nth-child(1)::before { background: linear-gradient(90deg, #06b6d4, #2563eb); }
+.home-feature-card:nth-child(2)::before { background: linear-gradient(90deg, #7c3aed, #ec4899); }
+.home-feature-card:nth-child(3)::before { background: linear-gradient(90deg, #10b981, #06b6d4); }
+.home-feature-card:nth-child(4)::before { background: linear-gradient(90deg, #f97316, #facc15); }
+
+/* Auth/register pages: safe broad selectors used by existing CSS */
+.auth-page,
+.login-page,
+.register-page,
+.forgot-page,
+.reset-page {
+  background:
+    radial-gradient(circle at 10% 0%, rgba(34, 211, 238, .18), transparent 28rem),
+    radial-gradient(circle at 94% 20%, rgba(168, 85, 247, .16), transparent 28rem),
+    radial-gradient(circle at 90% 90%, rgba(249, 115, 22, .14), transparent 28rem),
+    linear-gradient(180deg, #fffaff 0%, #f5fcff 55%, #fff7ed 100%);
+}
+.auth-card,
+.login-card,
+.register-card,
+.forgot-card,
+.reset-card {
+  border-color: rgba(14, 165, 233, .24) !important;
+  box-shadow: 0 24px 70px rgba(37, 99, 235, .10), 0 14px 34px rgba(236, 72, 153, .06) !important;
+}
+
+@media (max-width: 760px) {
+  .st-navbar-heading h1,
+  .workspace-toolbar-copy h2,
+  .db-welcome-row h2,
+  .account-hero-copy h2 {
+    -webkit-text-fill-color: transparent;
+  }
+}
