@@ -1,14 +1,14 @@
-import { apiRequest } from "./api";
+// Backend NotificationController is currently an empty stub (not yet implemented)
+// We return empty resolved promises to keep the UI clean without causing 404 network failures.
 
-// Backend NotificationController chưa implement
 export function getNotifications() {
-  return apiRequest("/notifications");
+  return Promise.resolve([]);
 }
 
 export function markNotificationAsRead(id) {
-  return apiRequest(`/notifications/${id}/read`, { method: "PUT" });
+  return Promise.resolve(null);
 }
 
 export function markAllNotificationsAsRead() {
-  return apiRequest("/notifications/read-all", { method: "PUT" });
+  return Promise.resolve(null);
 }

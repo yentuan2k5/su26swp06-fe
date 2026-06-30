@@ -1,25 +1,32 @@
 import { apiRequest } from "./api";
 
-// Backend BookmarkController chưa implement — các call này sẽ fail gracefully
+// Backend BookmarkController: GET /api/bookmarks
 export function getBookmarkedPapers() {
   return apiRequest("/bookmarks", { method: "GET" });
 }
 
+// Backend: POST /api/bookmarks/{paperId}
 export function addBookmark(paperId) {
-  return apiRequest("/bookmarks", { method: "POST", body: { paperId } });
+  return apiRequest(`/bookmarks/${paperId}`, { method: "POST" });
 }
 
-export function removeBookmark(bookmarkId) {
-  return apiRequest(`/bookmarks/${bookmarkId}`, { method: "DELETE" });
+// Backend: DELETE /api/bookmarks/{paperId}
+export function removeBookmark(paperId) {
+  return apiRequest(`/bookmarks/${paperId}`, { method: "DELETE" });
 }
 
+// Support paper ID toggle directly matching backend endpoint
 export function removeBookmarkByPaperId(paperId) {
-  return apiRequest(`/bookmarks/paper/${paperId}`, { method: "DELETE" });
+  return removeBookmark(paperId);
+}
+
+export function checkBookmarked(paperId) {
+  return apiRequest(`/bookmarks/check/${paperId}`, { method: "GET" });
 }
 
 export function toggleBookmark(paperId, currentlySaved) {
   if (currentlySaved) {
-    return removeBookmarkByPaperId(paperId);
+    return removeBookmark(paperId);
   }
   return addBookmark(paperId);
 }

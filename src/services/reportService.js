@@ -1,12 +1,12 @@
-import { apiRequest } from "./api";
+// Backend DashboardReportController is currently an empty stub (not yet implemented)
+// We return empty resolved promises to keep the UI clean without causing 404 network failures.
 
-// Backend DashboardReportController chưa implement
 export function getReports() {
-  return apiRequest("/reports");
+  return Promise.resolve([]);
 }
 
 export function generateReport(params = {}) {
-  return apiRequest("/reports/generate", { method: "POST", body: params });
+  return Promise.resolve(null);
 }
 
 export function downloadReport(url) {

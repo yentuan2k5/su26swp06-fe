@@ -1,10 +1,16 @@
 import { apiRequest } from "./api";
 
-// Backend TrendController chưa implement
+// Connect to GET /api/trends/keyword or GET /api/trends/topic from backend
 export function getTrendStats(params = {}) {
-  return apiRequest("/trends/stats", { params });
+  if (params.topic) {
+    return apiRequest("/trends/topic", { params: { topic: params.topic } });
+  }
+  const keyword = params.keyword || "computer science";
+  return apiRequest("/trends/keyword", { params: { keyword } });
 }
 
+// Connect to GET /api/topics/trending limit=10 from backend
 export function getTrendingTopics(params = {}) {
-  return apiRequest("/trends/topics", { params });
+  const limit = params.limit || 10;
+  return apiRequest("/topics/trending", { params: { limit } });
 }
