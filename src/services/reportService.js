@@ -1,12 +1,10 @@
-import { apiRequest } from "./api";
-
-// Backend DashboardReportController chưa implement
+// Backend DashboardReportController chưa implement endpoint nào
 export function getReports() {
-  return apiRequest("/reports");
+  return Promise.resolve([]);
 }
 
 export function generateReport(params = {}) {
-  return apiRequest("/reports/generate", { method: "POST", body: params });
+  return Promise.resolve(null);
 }
 
 export function downloadReport(url) {

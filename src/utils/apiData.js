@@ -90,7 +90,7 @@ export function normalizeJournal(journal = {}, index = 0) {
   };
 }
 
-// TopicResponse từ backend: chưa implement
+// TopicResponse từ backend:
 export function normalizeTopic(topic = {}, index = 0) {
   const rawGrowth = topic.growth ?? topic.change ?? 0;
   const growthNumber = Number(rawGrowth);
@@ -99,7 +99,7 @@ export function normalizeTopic(topic = {}, index = 0) {
     : String(rawGrowth || "");
 
   return {
-    id: topic.id ?? topic.topicId ?? index,
+    id: topic.researchTopicId ?? topic.id ?? topic.topicId ?? index,
     name: topic.name ?? topic.topicName ?? "Untitled topic",
     paperCount: `${formatNumber(topic.paperCount ?? topic.count ?? 0)} papers`,
     growth,

@@ -1,14 +1,12 @@
-import { apiRequest } from "./api";
-
-// Backend NotificationController chưa implement
+// Backend NotificationController chưa implement endpoint nào
 export function getNotifications() {
-  return apiRequest("/notifications");
+  return Promise.resolve([]);
 }
 
 export function markNotificationAsRead(id) {
-  return apiRequest(`/notifications/${id}/read`, { method: "PUT" });
+  return Promise.resolve(null);
 }
 
 export function markAllNotificationsAsRead() {
-  return apiRequest("/notifications/read-all", { method: "PUT" });
+  return Promise.resolve(null);
 }
