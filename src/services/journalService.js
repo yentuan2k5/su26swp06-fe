@@ -1,26 +1,26 @@
 import { apiRequest } from "./api";
 
-// GET /api/journals
+// Connect to GET /api/journals
 export function getJournals() {
-  return apiRequest("/journals");
+  return apiRequest("/journals", { auth: false });
 }
 
-// GET /api/journals/search?keyword=...
+// Connect to GET /api/journals/search?keyword=...
 export function searchJournals(keyword) {
-  return apiRequest("/journals/search", { params: { keyword } });
+  return apiRequest("/journals/search", { params: { keyword }, auth: false });
 }
 
-// GET /api/journals/top?limit=...
+// Connect to GET /api/journals/top?limit=...
 export function getTopJournals(limit = 10) {
-  return apiRequest("/journals/top", { params: { limit } });
+  return apiRequest("/journals/top", { params: { limit }, auth: false });
 }
 
-// GET /api/journals/{journalId}
+// Connect to GET /api/journals/{journalId}
 export function getJournalById(id) {
-  return apiRequest(`/journals/${id}`);
+  return apiRequest(`/journals/${id}`, { auth: false });
 }
 
-// GET /api/journals/{journalId}/papers?page=...&size=...
+// Connect to GET /api/journals/{journalId}/papers?page=...&size=...
 export function getPapersByJournal(journalId, page = 0, size = 10) {
-  return apiRequest(`/journals/${journalId}/papers`, { params: { page, size } });
+  return apiRequest(`/journals/${journalId}/papers`, { params: { page, size }, auth: false });
 }

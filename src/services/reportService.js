@@ -1,4 +1,6 @@
-// Backend DashboardReportController chưa implement endpoint nào
+// Backend DashboardReportController is currently an empty stub (not yet implemented)
+// We return empty resolved promises to keep the UI clean without causing 404 network failures.
+
 export function getReports() {
   return Promise.resolve([]);
 }
